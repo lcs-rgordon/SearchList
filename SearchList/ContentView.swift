@@ -18,6 +18,34 @@ struct ContentView: View {
     @State var searchText = ""
 
     // MARK: Computed properties
+    
+    // The possibly-filtered array of items
+    var filteredItems: [String] {
+        
+        if searchText.isEmpty {
+            
+            return items
+            
+        } else {
+            
+            // Create an empty array
+            var matchingItems: [String] = []
+            
+            // Iterate over original array
+            for item in items {
+                if item.contains(searchText) {
+                    matchingItems.append(item)
+                }
+            }
+            
+            // Return the array of items that match the search text
+            return matchingItems
+            
+        }
+        
+    }
+    
+    // The user interface
     var body: some View {
         
         NavigationView {
@@ -26,7 +54,7 @@ struct ContentView: View {
                 
                 Text("Searching on: \(searchText)")
 
-                List(items, id: \.self) { currentItem in
+                List(filteredItems, id: \.self) { currentItem in
                     Text(currentItem)
                 }
                 .searchable(text: $searchText)
