@@ -21,12 +21,18 @@ struct ContentView: View {
     var body: some View {
         
         NavigationView {
-            
-            List(items, id: \.self) { currentItem in
-                Text(currentItem)
-            }
-            .searchable(text: $searchText)
 
+            VStack {
+                
+                Text("Searching on: \(searchText)")
+
+                List(items, id: \.self) { currentItem in
+                    Text(currentItem)
+                }
+                .searchable(text: $searchText)
+
+            }
+            
         }
         
         
