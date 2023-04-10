@@ -20,10 +20,15 @@ struct ContentView: View {
     // MARK: Computed properties
     var body: some View {
         
-        List(items, id: \.self) { currentItem in
-            Text(currentItem)
+        NavigationView {
+            
+            List(items, id: \.self) { currentItem in
+                Text(currentItem)
+            }
+            .searchable(text: $searchText)
+
         }
-        .searchable(text: $searchText)
+        
         
     }
 }
